@@ -1,0 +1,336 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const categorias = [
+  {
+    nombre: "Reconnaissance",
+    icono: "🔍",
+    herramientas: [
+      { nombre: "Nmap", descripcion: "Network scanner para descubrimiento de hosts y servicios", nivel: "Intermedio" },
+      { nombre: "Shodan", descripcion: "Motor de búsqueda para dispositivos conectados a internet", nivel: "Básico" },
+      { nombre: "theHarvester", descripcion: "Recopilación de emails, subdominios y nombres", nivel: "Básico" },
+      { nombre: "Amass", descripcion: "Enumeración de subdominios y mapeo de red", nivel: "Avanzado" }
+    ]
+  },
+  {
+    nombre: "Web Security",
+    icono: "🌐",
+    herramientas: [
+      { nombre: "Burp Suite", descripcion: "Plataforma integrada para testing de aplicaciones web", nivel: "Avanzado" },
+      { nombre: "OWASP ZAP", descripcion: "Proxy de interceptación y scanner de vulnerabilidades", nivel: "Intermedio" },
+      { nombre: "SQLMap", descripcion: "Herramienta automatizada de SQL injection", nivel: "Intermedio" },
+      { nombre: "Nikto", descripcion: "Scanner de vulnerabilidades en servidores web", nivel: "Básico" }
+    ]
+  },
+  {
+    nombre: "Exploitation",
+    icono: "💥",
+    herramientas: [
+      { nombre: "Metasploit", descripcion: "Framework para desarrollo y ejecución de exploits", nivel: "Avanzado" },
+      { nombre: "ExploitDB", descripcion: "Base de datos pública de exploits y PoCs", nivel: "Básico" },
+      { nombre: "BeEF", descripcion: "Framework de explotación de navegadores", nivel: "Avanzado" },
+      { nombre: "John the Ripper", descripcion: "Cracker de contraseñas multi-plataforma", nivel: "Intermedio" }
+    ]
+  },
+  {
+    nombre: "Post-Exploitation",
+    icono: "🎯",
+    herramientas: [
+      { nombre: "Mimikatz", descripcion: "Extracción de credenciales de Windows", nivel: "Avanzado" },
+      { nombre: "PowerSploit", descripcion: "Suite de PowerShell para post-exploitation", nivel: "Avanzado" },
+      { nombre: "LinPEAS", descripcion: "Script de enumeración para escalada de privilegios Linux", nivel: "Intermedio" },
+      { nombre: "WinPEAS", descripcion: "Script de enumeración para escalada de privilegios Windows", nivel: "Intermedio" }
+    ]
+  }
+];
+---
+
+<Layout title="Herramientas - SEC_OPS">
+  <section class="herramientas-section">
+    <div class="container">
+      <div class="header-content">
+        <h1 class="page-title">
+          <span class="terminal-prompt">$</span> ./list-tools.sh
+        </h1>
+        <p class="page-description">
+          Arsenal de herramientas para pentesting y análisis de seguridad. Desde reconnaissance hasta post-exploitation.
+        </p>
+      </div>
+
+      <div class="categorias-container">
+        {categorias.map((categoria, catIndex) => (
+          <div class="categoria-section" style={`animation-delay: ${catIndex * 0.1}s`}>
+            <div class="categoria-header">
+              <span class="categoria-icono">{categoria.icono}</span>
+              <h2 class="categoria-titulo">{categoria.nombre}</h2>
+              <span class="herramientas-count">{categoria.herramientas.length} tools</span>
+            </div>
+
+            <div class="herramientas-grid">
+              {categoria.herramientas.map((herramienta) => (
+                <div class="herramienta-card">
+                  <div class="card-header">
+                    <h3 class="herramienta-nombre">{herramienta.nombre}</h3>
+                    <span class={`nivel ${herramienta.nivel.toLowerCase()}`}>
+                      {herramienta.nivel}
+                    </span>
+                  </div>
+                  <p class="herramienta-descripcion">{herramienta.descripcion}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="recursos-adicionales">
+        <h2 class="recursos-titulo">📚 Recursos de Aprendizaje</h2>
+        <div class="recursos-grid">
+          <a href="https://tryhackme.com" target="_blank" class="recurso-link">
+            <span class="recurso-nombre">TryHackMe</span>
+            <span class="recurso-desc">Plataforma de aprendizaje práctica</span>
+          </a>
+          <a href="https://hackthebox.com" target="_blank" class="recurso-link">
+            <span class="recurso-nombre">HackTheBox</span>
+            <span class="recurso-desc">Máquinas vulnerables y CTFs</span>
+          </a>
+          <a href="https://portswigger.net/web-security" target="_blank" class="recurso-link">
+            <span class="recurso-nombre">PortSwigger Academy</span>
+            <span class="recurso-desc">Cursos gratuitos de web security</span>
+          </a>
+          <a href="https://www.offensive-security.com" target="_blank" class="recurso-link">
+            <span class="recurso-nombre">Offensive Security</span>
+            <span class="recurso-desc">Certificaciones profesionales</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .herramientas-section {
+    padding: 4rem 0;
+    min-height: calc(100vh - 80px);
+  }
+
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .header-content {
+    margin-bottom: 4rem;
+    animation: fadeInUp 0.8s ease;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .page-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(2rem, 5vw, 3rem);
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+  }
+
+  .terminal-prompt {
+    color: var(--accent-primary);
+    margin-right: 0.5rem;
+  }
+
+  .page-description {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    max-width: 700px;
+  }
+
+  .categorias-container {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    margin-bottom: 4rem;
+  }
+
+  .categoria-section {
+    animation: fadeInUp 0.8s ease backwards;
+  }
+
+  .categoria-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid rgba(0, 255, 159, 0.2);
+  }
+
+  .categoria-icono {
+    font-size: 2rem;
+  }
+
+  .categoria-titulo {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.8rem;
+    color: var(--text-primary);
+    flex: 1;
+  }
+
+  .herramientas-count {
+    padding: 0.25rem 0.75rem;
+    background: rgba(0, 255, 159, 0.1);
+    color: var(--accent-primary);
+    border: 1px solid var(--accent-primary);
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-family: 'Space Mono', monospace;
+  }
+
+  .herramientas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+  }
+
+  .herramienta-card {
+    background: var(--bg-secondary);
+    border: 1px solid rgba(0, 255, 159, 0.2);
+    border-radius: 8px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+  }
+
+  .herramienta-card:hover {
+    transform: translateX(5px);
+    border-color: var(--accent-primary);
+    box-shadow: 0 5px 20px rgba(0, 255, 159, 0.15);
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+  }
+
+  .herramienta-nombre {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.1rem;
+    color: var(--accent-primary);
+  }
+
+  .nivel {
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .nivel.básico {
+    background: rgba(0, 255, 159, 0.1);
+    color: var(--accent-primary);
+    border: 1px solid var(--accent-primary);
+  }
+
+  .nivel.intermedio {
+    background: rgba(255, 190, 11, 0.1);
+    color: #ffbe0b;
+    border: 1px solid #ffbe0b;
+  }
+
+  .nivel.avanzado {
+    background: rgba(255, 0, 110, 0.1);
+    color: var(--accent-danger);
+    border: 1px solid var(--accent-danger);
+  }
+
+  .herramienta-descripcion {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .recursos-adicionales {
+    background: var(--bg-secondary);
+    border: 1px solid rgba(0, 255, 159, 0.2);
+    border-radius: 8px;
+    padding: 3rem;
+    animation: fadeInUp 0.8s ease backwards;
+    animation-delay: 0.4s;
+  }
+
+  .recursos-titulo {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.8rem;
+    color: var(--text-primary);
+    margin-bottom: 2rem;
+  }
+
+  .recursos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .recurso-link {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1.5rem;
+    background: var(--bg-primary);
+    border: 1px solid rgba(0, 217, 255, 0.2);
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .recurso-link:hover {
+    border-color: var(--accent-secondary);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(0, 217, 255, 0.2);
+  }
+
+  .recurso-nombre {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.1rem;
+    color: var(--accent-secondary);
+    font-weight: 700;
+  }
+
+  .recurso-desc {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 768px) {
+    .herramientas-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .recursos-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .categoria-header {
+      flex-wrap: wrap;
+    }
+
+    .container {
+      padding: 0 1.5rem;
+    }
+
+    .recursos-adicionales {
+      padding: 2rem 1.5rem;
+    }
+  }
+</style>

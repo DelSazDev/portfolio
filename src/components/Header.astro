@@ -1,0 +1,171 @@
+---
+// Header.astro
+---
+
+<header class="site-header">
+  <div class="header-container">
+    <a href="/" class="logo">
+      <svg class="logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 2L36 12V28L20 38L4 28V12L20 2Z" stroke="currentColor" stroke-width="2" fill="none"/>
+        <path d="M20 12L28 17V27L20 32L12 27V17L20 12Z" fill="currentColor"/>
+        <circle cx="20" cy="22" r="3" fill="var(--bg-primary)"/>
+      </svg>
+      <span class="logo-text">SEC<span class="logo-accent">_</span>OPS</span>
+    </a>
+    
+    <nav class="nav-menu">
+      <a href="/" class="nav-link">Home</a>
+      <a href="/proyectos" class="nav-link">Proyectos</a>
+      <a href="/blog" class="nav-link">Blog</a>
+      <a href="/herramientas" class="nav-link">Herramientas</a>
+      <a href="/contacto" class="nav-link">Contacto</a>
+    </nav>
+
+    <button class="mobile-toggle" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgba(10, 12, 16, 0.8);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0, 255, 159, 0.1);
+  }
+
+  .header-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: transform 0.3s ease;
+  }
+
+  .logo:hover {
+    transform: scale(1.05);
+  }
+
+  .logo-icon {
+    width: 40px;
+    height: 40px;
+    color: var(--accent-primary);
+    animation: rotate-pulse 4s ease-in-out infinite;
+  }
+
+  @keyframes rotate-pulse {
+    0%, 100% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(180deg) scale(1.1); }
+  }
+
+  .logo-text {
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .logo-accent {
+    color: var(--accent-primary);
+    animation: blink 1.5s step-end infinite;
+  }
+
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+
+  .nav-menu {
+    display: flex;
+    gap: 2.5rem;
+  }
+
+  .nav-link {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    position: relative;
+    padding: 0.5rem 0;
+    transition: color 0.3s ease;
+  }
+
+  .nav-link::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent-primary);
+    transition: width 0.3s ease;
+  }
+
+  .nav-link:hover {
+    color: var(--accent-primary);
+  }
+
+  .nav-link:hover::before {
+    width: 100%;
+  }
+
+  .mobile-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+
+  .mobile-toggle span {
+    width: 25px;
+    height: 2px;
+    background: var(--accent-primary);
+    transition: all 0.3s ease;
+  }
+
+  @media (max-width: 768px) {
+    .nav-menu {
+      display: none;
+    }
+
+    .mobile-toggle {
+      display: flex;
+    }
+
+    .header-container {
+      padding: 1rem 1.5rem;
+    }
+  }
+</style>
+
+<script>
+  // Mobile menu toggle functionality
+  const toggle = document.querySelector('.mobile-toggle');
+  const nav = document.querySelector('.nav-menu');
+
+  if (toggle && nav) {
+    toggle.addEventListener('click', () => {
+      nav.classList.toggle('active');
+    });
+  }
+</script>
